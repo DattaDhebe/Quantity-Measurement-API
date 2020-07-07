@@ -13,7 +13,6 @@ namespace RepositoryLayer
         { 
         }
 
-        //IDesignTimeDbContextFactory<ApplicationDbContext> designTimeDbContextFactory
         //Dbset for Quantity table
         public DbSet<Quantity> Quantities { get; set; }
 

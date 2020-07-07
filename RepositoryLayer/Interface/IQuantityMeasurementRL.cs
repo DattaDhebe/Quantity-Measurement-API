@@ -1,9 +1,9 @@
-﻿using CommanLayer;
+using CommanLayer;
 
 namespace RepositoryLayer.Interface
 {
     public interface IQuantityMeasurementRL
     {
-        Quantity Add(Quantity quantity);        
+        Quantity Add(Quantity quantity);
     }
 }

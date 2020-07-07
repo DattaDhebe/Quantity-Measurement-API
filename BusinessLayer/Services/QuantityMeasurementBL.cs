@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using BusinessLayer.Interface;
 using CommanLayer;
 using RepositoryLayer.Interface;
