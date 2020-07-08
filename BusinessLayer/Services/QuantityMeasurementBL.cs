@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using BusinessLayer.Interface;
 using CommanLayer;
+using CommanLayer.Model;
 using RepositoryLayer.Interface;
 
 namespace BusinessLayer.Services
@@ -49,12 +50,23 @@ namespace BusinessLayer.Services
         {
             try
             {
+                string operation = quantity.OptionType;
                 double value = quantity.Value;
                 double result = quantity.Result;
-                const double InchToFeet = 12;
+                const double InchToFeetConstant = 12;
+                const double InchToYardConstant = 36;
 
-                return value * InchToFeet;
-                
+                if (operation == All_Enum.OptionType.InchToFeet.ToString())
+                {
+                    result = value / InchToFeetConstant;
+                }
+                else if (operation == All_Enum.OptionType.InchToYard.ToString())
+                {
+                    result = value / InchToYardConstant;
+                }
+
+                return Math.Round(result, 2);
+
             }
             catch (Exception e)
             {

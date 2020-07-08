@@ -14,6 +14,7 @@ namespace CommanLayer.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    OptionType = table.Column<string>(nullable: false),
                     Value = table.Column<double>(nullable: false),
                     Result = table.Column<double>(nullable: false),
                     DateOfCreation = table.Column<DateTime>(nullable: false)

@@ -10,7 +10,7 @@ using RepositoryLayer;
 namespace CommanLayer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200707063840_InitialMigration")]
+    [Migration("20200708154655_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,6 +28,9 @@ namespace CommanLayer.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("DateOfCreation");
+
+                    b.Property<string>("OptionType")
+                        .IsRequired();
 
                     b.Property<double>("Result");
 

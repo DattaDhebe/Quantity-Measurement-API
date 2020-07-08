@@ -27,6 +27,9 @@ namespace CommanLayer.Migrations
 
                     b.Property<DateTime>("DateOfCreation");
 
+                    b.Property<string>("OptionType")
+                        .IsRequired();
+
                     b.Property<double>("Result");
 
                     b.Property<double>("Value");

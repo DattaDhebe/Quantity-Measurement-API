@@ -10,6 +10,10 @@ namespace CommanLayer
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        [Required]
+        [RegularExpression(@"^[A-Z][a-zA-Z]*$")]
+        public string OptionType { get; set; }
+
         /// <summary>
         /// value for input
         /// </summary>
