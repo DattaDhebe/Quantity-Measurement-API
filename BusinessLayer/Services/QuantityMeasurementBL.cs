@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using BusinessLayer.Interface;
 using CommanLayer;
 using RepositoryLayer.Interface;
@@ -12,6 +13,18 @@ namespace BusinessLayer.Services
         public QuantityMeasurementBL(IQuantityMeasurementRL quantityMeasurementRL)
         {
             this.quantityMeasurementRL = quantityMeasurementRL;
+        }
+
+        public IEnumerable<Quantity> GetAllQuantity()
+        {
+            try
+            {
+                return quantityMeasurementRL.GetAllQuantity();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public Quantity Convert(Quantity quantity)

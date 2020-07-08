@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using BusinessLayer;
 using BusinessLayer.Interface;
 using CommanLayer;
@@ -17,11 +18,34 @@ namespace Quantity_Measurement_API.Controllers
             businessLayer = BusinessDependencyInjection;
         }
 
-        /// <summary>
-        /// Method to Add Conversion Detail
-        /// </summary>
-        /// <param name="Info"></param>
-        /// <returns> add conversion in database </returns>
+        [HttpGet]
+        public ActionResult<IEnumerable<Quantity>> GetAllQuantity()
+        {
+            try
+            {
+                var result = businessLayer.GetAllQuantity();
+
+                //if entry is not equal to null
+                if (!result.Equals(null))
+                {
+                    bool status = true;
+                    var message = "New Data Added Sucessfully";
+                    return this.Ok(new { status, message, data = result });
+                }
+                else
+                {
+                    bool status = false;
+                    var message = "New Data is not Added";
+                    return this.BadRequest(new { status, message, data = result });
+                }
+            }
+            catch (Exception e)
+            {
+                bool status = false;
+                return BadRequest(new { status, e.Message });
+            }
+        }
+
         [HttpPost]
         public IActionResult Convert([FromBody] Quantity quantity)
         {
