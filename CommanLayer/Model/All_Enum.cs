@@ -8,12 +8,23 @@ namespace CommanLayer.Model
     {
         public enum OptionType
         {
+            /// <summary>
+            ///  For Length
+            /// </summary>
             InchToFeet,
             InchToYard,
             FeetToInch,
             FeetToYard,
             YardToInch,
-            YardToFeet
+            YardToFeet,
+
+            // For Weight
+            GramToKilogram,
+            GramToTonne,
+            KilogramToGram,
+            KilogramToTonne,
+            TonneToGram
+            
         }
 
         public enum Unit

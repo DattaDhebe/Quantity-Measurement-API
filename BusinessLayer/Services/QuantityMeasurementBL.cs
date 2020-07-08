@@ -66,10 +66,15 @@ namespace BusinessLayer.Services
                 string operation = quantity.OptionType;
                 double value = quantity.Value;
                 double result = quantity.Result;
+
+                // For Lenght Unit
                 const double InchToFeetConstant = 12;
                 const double InchToYardConstant = 36;
                 const double FeetToYardConstant = 3;
+                const double CentimeterToInchConstant = 2.5;
+                const double WeightConstant = 1000;
 
+                // For Lenght Unit
                 if (operation == All_Enum.OptionType.InchToFeet.ToString())
                 {
                     result = value / InchToFeetConstant;
@@ -94,8 +99,28 @@ namespace BusinessLayer.Services
                 {
                     result = value * FeetToYardConstant;
                 }
+                else if (operation == All_Enum.OptionType.CentimeterToInch.ToString())
+                {
+                    result = value / CentimeterToInchConstant;
+                }
 
-
+                // For Weight Unit
+                if (operation == All_Enum.OptionType.GramToKilogram.ToString() || operation == All_Enum.OptionType.KilogramToTonne.ToString())
+                {
+                    result = value / WeightConstant;
+                }
+                else if (operation == All_Enum.OptionType.GramToTonne.ToString())
+                {
+                    result = value / (WeightConstant * WeightConstant);
+                }
+                else if (operation == All_Enum.OptionType.KilogramToGram.ToString())
+                {
+                    result = value * WeightConstant;
+                }
+                else if (operation == All_Enum.OptionType.TonneToGram.ToString())
+                {
+                    result = value * (WeightConstant * WeightConstant);
+                }
 
                 return Math.Round(result, 2);
 
