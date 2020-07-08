@@ -55,6 +55,7 @@ namespace BusinessLayer.Services
                 double result = quantity.Result;
                 const double InchToFeetConstant = 12;
                 const double InchToYardConstant = 36;
+                const double FeetToYardConstant = 3;
 
                 if (operation == All_Enum.OptionType.InchToFeet.ToString())
                 {
@@ -63,6 +64,22 @@ namespace BusinessLayer.Services
                 else if (operation == All_Enum.OptionType.InchToYard.ToString())
                 {
                     result = value / InchToYardConstant;
+                }
+                else if (operation == All_Enum.OptionType.FeetToInch.ToString())
+                {
+                    result = value * InchToFeetConstant;
+                }
+                else if (operation == All_Enum.OptionType.FeetToYard.ToString())
+                {
+                    result = value / FeetToYardConstant;
+                }
+                else if (operation == All_Enum.OptionType.YardToInch.ToString())
+                {
+                    result = value * InchToYardConstant;
+                }
+                else if (operation == All_Enum.OptionType.YardToFeet.ToString())
+                {
+                    result = value * FeetToYardConstant;
                 }
 
                 return Math.Round(result, 2);
