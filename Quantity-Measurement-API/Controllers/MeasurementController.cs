@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using BusinessLayer;
 using BusinessLayer.Interface;
 using CommanLayer;
+using CommanLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Quantity_Measurement_API.Controllers
@@ -102,22 +103,22 @@ namespace Quantity_Measurement_API.Controllers
 
         [HttpPost]
         [Route("compare")]
-        public IActionResult AddComparison([FromBody] Comparision Info)
+        public IActionResult AddComparedValue([FromBody] Compare Info)
         {
             try
             {
-                var result = businessLayer.AddComparison(Info);
+                var result = businessLayer.AddComparedValue(Info);
                 if (!result.Equals(null))
                 {
                     bool status = true;
-                    var message = "Data is deleted sucessfully";
+                    var message = "new data is added sucessfully";
                     return this.Ok(new { status, message, data = Info });
                 }
                 else
                 {
                     bool status = false;
-                    var message = "Data is not deleted";
-                    return this.BadRequest(new { status, message, data = Info });
+                    var message = "new data is not added.";
+                    return this.BadRequest(new { status, message, data = result });
                 }
             }
             catch (Exception e)

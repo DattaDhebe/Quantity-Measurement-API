@@ -1,4 +1,5 @@
 using CommanLayer;
+using CommanLayer.Models;
 using System.Collections.Generic;
 
 namespace RepositoryLayer.Interface
@@ -10,5 +11,7 @@ namespace RepositoryLayer.Interface
         Quantity Add(Quantity quantity);
 
         IEnumerable<Quantity> DeleteQuntityById(int Id);
+
+        Compare AddComparedValue(Compare compare);
     }
 }

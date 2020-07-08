@@ -1,4 +1,5 @@
 ﻿using CommanLayer;
+using CommanLayer.Models;
 using System.Collections.Generic;
 
 namespace BusinessLayer.Interface
@@ -10,6 +11,8 @@ namespace BusinessLayer.Interface
         Quantity Convert(Quantity info);
 
         IEnumerable<Quantity> DeleteQuntityById(int Id);
+
+        Compare AddComparedValue(Compare compare);
 
     }
 }

@@ -31,9 +31,10 @@ namespace CommanLayer.Model
             LiterToMililiter,
             LiterToGallon,
             MililiterToGallon,
-            GallonToLiter
+            GallonToLiter,
+            GallonToMililiter
 
-            
+
         }
 
         public enum Unit
@@ -41,7 +42,14 @@ namespace CommanLayer.Model
             Inch,
             Feet,
             Yard,
-            Centimeter
+            Centimeter,
+            Gram,
+            Tonne,
+            Liter,
+            Gallon,
+            Kilogram,
+            Mililiter,
+            Farenheit
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CommanLayer;
+using CommanLayer.Models;
 using RepositoryLayer.Interface;
 
 namespace RepositoryLayer.Services
@@ -65,6 +66,23 @@ namespace RepositoryLayer.Services
                     dBContext.SaveChanges();
                 }
                 return quantity;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        public Compare AddComparedValue(Compare compare)
+        {
+            try
+            {
+                //send the data to database and add
+                dBContext.Comparision.Add(compare);
+
+                //saves all changes in database
+                dBContext.SaveChanges();
+                return compare;
             }
             catch (Exception e)
             {
