@@ -72,7 +72,14 @@ namespace BusinessLayer.Services
                 const double InchToYardConstant = 36;
                 const double FeetToYardConstant = 3;
                 const double CentimeterToInchConstant = 2.5;
+
+                // For Weight 
                 const double WeightConstant = 1000;
+
+                // For Volume
+                const double VolumeConstant = 1000;
+                const double GallonToLiterConstant = 3.78;
+                //const double GallonToMililiterConstant = 3785.41;
 
                 // For Lenght Unit
                 if (operation == All_Enum.OptionType.InchToFeet.ToString())
@@ -104,7 +111,7 @@ namespace BusinessLayer.Services
                     result = value / CentimeterToInchConstant;
                 }
 
-                // For Weight Unit
+                // For Weight Units
                 if (operation == All_Enum.OptionType.GramToKilogram.ToString() || operation == All_Enum.OptionType.KilogramToTonne.ToString())
                 {
                     result = value / WeightConstant;
@@ -120,6 +127,24 @@ namespace BusinessLayer.Services
                 else if (operation == All_Enum.OptionType.TonneToGram.ToString())
                 {
                     result = value * (WeightConstant * WeightConstant);
+                }
+
+                //For Volume Units
+                else if (operation == All_Enum.OptionType.MililiterToLiter.ToString())
+                {
+                    result = value / VolumeConstant;
+                }
+                else if (operation == All_Enum.OptionType.LiterToMililiter.ToString())
+                {
+                    result = value * VolumeConstant;
+                }
+                else if (operation == All_Enum.OptionType.LiterToGallon.ToString())
+                {
+                    result = value / GallonToLiterConstant;
+                }
+                else if (operation == All_Enum.OptionType.GallonToLiter.ToString())
+                {
+                    result = value * GallonToLiterConstant;
                 }
 
                 return Math.Round(result, 2);

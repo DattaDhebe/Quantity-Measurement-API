@@ -17,13 +17,22 @@ namespace CommanLayer.Model
             FeetToYard,
             YardToInch,
             YardToFeet,
+            CentimeterToInch,
 
             // For Weight
             GramToKilogram,
             GramToTonne,
             KilogramToGram,
             KilogramToTonne,
-            TonneToGram
+            TonneToGram,
+
+            // For Volume
+            MililiterToLiter,
+            LiterToMililiter,
+            LiterToGallon,
+            MililiterToGallon,
+            GallonToLiter
+
             
         }
 

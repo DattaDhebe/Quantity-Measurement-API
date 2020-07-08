@@ -80,8 +80,6 @@ namespace Quantity_Measurement_API.Controllers
             try
             {
                 var result = businessLayer.DeleteQuntityById(Id);
-                
-                //if entry is not equal to null
                 if (!result.Equals(null))
                 {
                     bool status = true;
@@ -93,6 +91,33 @@ namespace Quantity_Measurement_API.Controllers
                     bool status = false;
                     var message = "Data is not deleted";
                     return this.BadRequest(new { status, message, data = result });
+                }
+            }
+            catch (Exception e)
+            {
+                bool status = false;
+                return BadRequest(new { status, e.Message });
+            }
+        }
+
+        [HttpPost]
+        [Route("compare")]
+        public IActionResult AddComparison([FromBody] Comparision Info)
+        {
+            try
+            {
+                var result = businessLayer.AddComparison(Info);
+                if (!result.Equals(null))
+                {
+                    bool status = true;
+                    var message = "Data is deleted sucessfully";
+                    return this.Ok(new { status, message, data = Info });
+                }
+                else
+                {
+                    bool status = false;
+                    var message = "Data is not deleted";
+                    return this.BadRequest(new { status, message, data = Info });
                 }
             }
             catch (Exception e)
