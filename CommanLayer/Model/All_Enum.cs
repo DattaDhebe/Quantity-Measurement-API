@@ -9,7 +9,11 @@ namespace CommanLayer.Model
         public enum OptionType
         {
             InchToFeet,
-            InchToYard
+            InchToYard,
+            FeetToInch,
+            FeetToYard,
+            YardToInch,
+            YardToFeet
         }
 
         public enum Unit

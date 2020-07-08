@@ -74,5 +74,33 @@ namespace Quantity_Measurement_API.Controllers
             }
         }
 
+        [HttpDelete("{Id}")]
+        public IActionResult DeleteQuntityById(int Id)
+        {
+            try
+            {
+                var result = businessLayer.DeleteQuntityById(Id);
+                
+                //if entry is not equal to null
+                if (!result.Equals(null))
+                {
+                    bool status = true;
+                    var message = "Data is deleted sucessfully";
+                    return this.Ok(new { status, message, data = result });
+                }
+                else
+                {
+                    bool status = false;
+                    var message = "Data is not deleted";
+                    return this.BadRequest(new { status, message, data = result });
+                }
+            }
+            catch (Exception e)
+            {
+                bool status = false;
+                return BadRequest(new { status, e.Message });
+            }
+        }
+
     }
 }

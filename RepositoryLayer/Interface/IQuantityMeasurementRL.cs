@@ -8,5 +8,7 @@ namespace RepositoryLayer.Interface
         IEnumerable<Quantity> GetAllQuantity();
 
         Quantity Add(Quantity quantity);
+
+        IEnumerable<Quantity> DeleteQuntityById(int Id);
     }
 }

@@ -9,5 +9,7 @@ namespace BusinessLayer.Interface
 
         Quantity Convert(Quantity info);
 
+        IEnumerable<Quantity> DeleteQuntityById(int Id);
+
     }
 }

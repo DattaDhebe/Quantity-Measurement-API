@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using CommanLayer;
 using RepositoryLayer.Interface;
 
@@ -35,10 +36,34 @@ namespace RepositoryLayer.Services
         {
             try
             {
-                //add Data in database
+                // add data to database
                 dBContext.Quantities.Add(quantity);
-                //saves all changes in database
+
+                // save all changes to databse
                 dBContext.SaveChanges();
+
+                return quantity;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        public IEnumerable<Quantity> DeleteQuntityById(int Id)
+        {
+            try
+            {
+                List<Quantity> quantity = dBContext.Quantities.Take(1).ToList();
+                //Quantity quantity = dBContext.Quantities.Find(Id);
+                if (quantity != null)
+                {
+                    //Remove Data from database
+                    dBContext.Quantities.RemoveRange(quantity);
+
+                    //saves all changes in database
+                    dBContext.SaveChanges();
+                }
                 return quantity;
             }
             catch (Exception e)

@@ -33,12 +33,25 @@ namespace BusinessLayer.Services
             try
             {
                 quantity.Result = Calculate(quantity);
+                
                 if(quantity.Result > 0)
                 {
                     return quantityMeasurementRL.Add(quantity);
                 }
 
                 return quantity;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        public IEnumerable<Quantity> DeleteQuntityById(int Id)
+        {
+            try
+            {
+                return quantityMeasurementRL.DeleteQuntityById(Id);
             }
             catch (Exception e)
             {
@@ -81,6 +94,8 @@ namespace BusinessLayer.Services
                 {
                     result = value * FeetToYardConstant;
                 }
+
+
 
                 return Math.Round(result, 2);
 
