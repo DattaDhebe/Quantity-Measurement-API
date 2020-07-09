@@ -14,5 +14,9 @@ namespace BusinessLayer.Interface
 
         Compare AddComparedValue(Compare compare);
 
+        IEnumerable<Compare> GetAllComparison();
+
+        IEnumerable<Compare> DeleteComparisonById(int Id);
+
     }
 }

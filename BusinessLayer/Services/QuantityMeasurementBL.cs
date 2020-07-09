@@ -29,6 +29,18 @@ namespace BusinessLayer.Services
             }
         }
 
+        public IEnumerable<Compare> GetAllComparison()
+        {
+            try
+            {
+                return quantityMeasurementRL.GetAllComparison();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
         public Quantity Convert(Quantity quantity)
         {
             try
@@ -53,6 +65,18 @@ namespace BusinessLayer.Services
             try
             {
                 return quantityMeasurementRL.DeleteQuntityById(Id);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        public IEnumerable<Compare> DeleteComparisonById(int Id)
+        {
+            try
+            {
+                return quantityMeasurementRL.DeleteComparisonById(Id);
             }
             catch (Exception e)
             {

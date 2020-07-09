@@ -30,13 +30,13 @@ namespace Quantity_Measurement_API.Controllers
                 if (!result.Equals(null))
                 {
                     bool status = true;
-                    var message = "New Data Added Sucessfully";
+                    var message = "Data is Extacted Sucessfully";
                     return this.Ok(new { status, message, data = result });
                 }
                 else
                 {
                     bool status = false;
-                    var message = "New Data is not Added";
+                    var message = "Sorry, Not able to Extract Data";
                     return this.BadRequest(new { status, message, data = result });
                 }
             }
@@ -112,7 +112,7 @@ namespace Quantity_Measurement_API.Controllers
                 {
                     bool status = true;
                     var message = "new data is added sucessfully";
-                    return this.Ok(new { status, message, data = Info });
+                    return this.Ok(new { status, message, data = result });
                 }
                 else
                 {
@@ -127,6 +127,61 @@ namespace Quantity_Measurement_API.Controllers
                 return BadRequest(new { status, e.Message });
             }
         }
+
+        [HttpGet]
+        [Route("compare")]
+        public ActionResult<IEnumerable<Quantity>> GetAllComparison()
+        {
+            try
+            {
+                var result = businessLayer.GetAllComparison();
+                if (!result.Equals(null))
+                {
+                    bool status = true;
+                    var message = "Data is Extacted Sucessfully";
+                    return this.Ok(new { status, message, data = result });
+                }
+                else
+                {
+                    bool status = false;
+                    var message = "Sorry, Not able to Extract Data";
+                    return this.BadRequest(new { status, message, data = result });
+                }
+            }
+            catch (Exception e)
+            {
+                bool status = false;
+                return BadRequest(new { status, e.Message });
+            }
+        }
+
+        [HttpDelete]
+        [Route("compare/{Id}")]
+        public IActionResult DeleteComparisonById(int Id)
+        {
+            try
+            {
+                var result = businessLayer.DeleteComparisonById(Id);
+                if (!result.Equals(null))
+                {
+                    bool status = true;
+                    var message = "Data is deleted sucessfully";
+                    return this.Ok(new { status, message, data = result });
+                }
+                else
+                {
+                    bool status = false;
+                    var message = "Data is not deleted";
+                    return this.BadRequest(new { status, message, data = result });
+                }
+            }
+            catch (Exception e)
+            {
+                bool status = false;
+                return BadRequest(new { status, e.Message });
+            }
+        }
+
 
     }
 }

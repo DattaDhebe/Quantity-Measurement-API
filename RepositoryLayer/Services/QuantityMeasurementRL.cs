@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CommanLayer;
 using CommanLayer.Models;
+using Microsoft.EntityFrameworkCore.Internal;
 using RepositoryLayer.Interface;
 
 namespace RepositoryLayer.Services
@@ -33,6 +34,18 @@ namespace RepositoryLayer.Services
             }
         }
 
+        public IEnumerable<Compare> GetAllComparison()
+        {
+            try
+            {
+                return dBContext.Comparision;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
         public Quantity Add(Quantity quantity)
         {
             try
@@ -55,17 +68,39 @@ namespace RepositoryLayer.Services
         {
             try
             {
-                List<Quantity> quantity = dBContext.Quantities.Take(1).ToList();
+                List<Quantity> quantity = dBContext.Quantities.ToList();
                 //Quantity quantity = dBContext.Quantities.Find(Id);
                 if (quantity != null)
                 {
                     //Remove Data from database
-                    dBContext.Quantities.RemoveRange(quantity);
+                    dBContext.Quantities.RemoveRange();
 
                     //saves all changes in database
                     dBContext.SaveChanges();
                 }
                 return quantity;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        public IEnumerable<Compare> DeleteComparisonById(int Id)
+        {
+            try
+            {
+                List<Compare> compare = dBContext.Comparision.Take(1).ToList();
+                //Compare compare = dBContext.Comparision.Find(Id);
+                if (compare != null)
+                {
+                    //Remove Data from database
+                    dBContext.Comparision.RemoveRange(compare);
+
+                    //saves all changes in database
+                    dBContext.SaveChanges();
+                }
+                return compare;
             }
             catch (Exception e)
             {

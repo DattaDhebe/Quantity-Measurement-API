@@ -13,5 +13,9 @@ namespace RepositoryLayer.Interface
         IEnumerable<Quantity> DeleteQuntityById(int Id);
 
         Compare AddComparedValue(Compare compare);
+
+        IEnumerable<Compare> GetAllComparison();
+
+        IEnumerable<Compare> DeleteComparisonById(int Id);
     }
 }
