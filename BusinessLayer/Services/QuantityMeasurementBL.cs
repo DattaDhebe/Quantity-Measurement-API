@@ -117,7 +117,7 @@ namespace BusinessLayer.Services
         {
             try
             {
-                //compare.Result = CompareConversion(compare);
+                compare.Result = UnitComparision(compare);
                 if (compare.Result != null)
                 {
                     return quantityMeasurementRL.AddComparedValue(compare);
@@ -130,8 +130,8 @@ namespace BusinessLayer.Services
                 throw new Exception(e.Message);
             }
         }
-    
-        public double UnitConversion(Quantity quantity)
+
+        private double UnitConversion(Quantity quantity)
         {
             try
             {
@@ -139,55 +139,95 @@ namespace BusinessLayer.Services
                 string MeasurementType = quantity.MeasurementType;
                 string conversionType = quantity.ConversionType;
                 double value = quantity.Value;
+                return Conversion(MeasurementType, conversionType, value);
 
-                Length length = new Length();
-                Weights weights = new Weights();
-                Volumes volume = new Volumes();
-                Temperature temperature = new Temperature();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }           
+        }
 
-                if (MeasurementType == "length")
+        private string UnitComparision(Compare compare)
+        {
+            try
+            {
+                string measurmentType = compare.MeasurementType;
+                string firstValueUnit = compare.First_Value_Unit;
+                double firstValue = compare.First_Value;
+                string secondValueUnit = compare.Second_Value_Unit;
+                double secondValue = compare.Second_Value;
+                
+                double firstResult =  this.Conversion(measurmentType, firstValueUnit, firstValue);
+                double secondResult =  this.Conversion(measurmentType, secondValueUnit, secondValue);
+
+                if (firstResult == secondResult)
                 {
-                    LengthUnit unit = length.SetUnitAndConvertLength(conversionType);
-
-                    if (unit == LengthUnit.FeetToInch || unit == LengthUnit.YardToInch || unit == LengthUnit.CentimeterToInch)
-                    {
-                        return length.ConvertLength(unit, value);
-                    }  
+                    return "Equal";
                 }
 
-                if (MeasurementType == "weight")
+                if (firstResult >= secondResult)
                 {
-                    WeightsUnit unit = weights.SetUnitAndConvertWeights(conversionType);
-                    if (unit.Equals(WeightsUnit.KilogramToGrams) || unit.Equals(WeightsUnit.TonneToKilograms))
-                    {
-                        return weights.ConvertWeigths(unit, value);
-                    }
+                    return firstValue + " is greater than " + secondValue;
                 }
 
-                if (MeasurementType == "volume")
+                if (firstResult <= secondResult)
                 {
-                    VolumeUnit unit = volume.SetUnitAndConvertVolume(conversionType);
-                    if (unit.Equals(VolumeUnit.GallonToLiter) || unit.Equals(VolumeUnit.LiterToMilliliter) || unit.Equals(VolumeUnit.MilliliterToLiter))
-                    {
-                        return volume.ConvertVolumes(unit, value);
-                    }
+                    return firstValue + " is less than " + secondValue;
                 }
-                if (MeasurementType == "temperature")
-                {
-                    TemperatureUnit unit = temperature.SetUnitAndConvertTemperature(conversionType);
-                    if (unit.Equals(TemperatureUnit.CelsiusToFahrenheit))
-                    {
-                        return temperature.ConvertTemperature(unit, value);
-                    }
-                }              
 
-                return value;
-              
+                return null;
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
-        }    
+        }
+
+        private double Conversion(string MeasurementType, string conversionType, double value)
+        {
+            Length length = new Length();
+            Weights weights = new Weights();
+            Volumes volume = new Volumes();
+            Temperature temperature = new Temperature();
+
+            if (MeasurementType == "length")
+            {
+                LengthUnit unit = length.SetUnitAndConvertLength(conversionType);
+
+                if (unit == LengthUnit.FeetToInch || unit == LengthUnit.YardToInch || unit == LengthUnit.CentimeterToInch)
+                {
+                    return length.ConvertLength(unit, value);
+                }
+            }
+
+            if (MeasurementType == "weight")
+            {
+                WeightsUnit unit = weights.SetUnitAndConvertWeights(conversionType);
+                if (unit.Equals(WeightsUnit.KilogramToGrams) || unit.Equals(WeightsUnit.TonneToKilograms))
+                {
+                    return weights.ConvertWeigths(unit, value);
+                }
+            }
+
+            if (MeasurementType == "volume")
+            {
+                VolumeUnit unit = volume.SetUnitAndConvertVolume(conversionType);
+                if (unit.Equals(VolumeUnit.GallonToLiter) || unit.Equals(VolumeUnit.LiterToMilliliter) || unit.Equals(VolumeUnit.MilliliterToLiter))
+                {
+                    return volume.ConvertVolumes(unit, value);
+                }
+            }
+            if (MeasurementType == "temperature")
+            {
+                TemperatureUnit unit = temperature.SetUnitAndConvertTemperature(conversionType);
+                if (unit.Equals(TemperatureUnit.CelsiusToFahrenheit))
+                {
+                    return temperature.ConvertTemperature(unit, value);
+                }
+            }
+
+            return value;
+        }
     }
 }

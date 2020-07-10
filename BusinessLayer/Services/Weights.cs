@@ -66,7 +66,7 @@ namespace BusinessLayer
                 return WeightsUnit.TonneToKilograms;
             }
 
-            return 0; 
+            return WeightsUnit.Grams; 
         }
 
 

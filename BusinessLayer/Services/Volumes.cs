@@ -79,7 +79,7 @@ namespace BusinessLayer
                 return VolumeUnit.MilliliterToLiter;
             }
 
-            return 0; 
+            return VolumeUnit.Liter; 
         }
 
         /// <summary>

@@ -27,8 +27,6 @@ namespace BusinessLayer
         {
         }
 
-
-
         /// <summary>
         /// enum to specify measurements
         /// </summary>
@@ -88,7 +86,7 @@ namespace BusinessLayer
                 return LengthUnit.CentimeterToInch;
             }
 
-            return 0;
+            return LengthUnit.Inch;
         }
 
         /// <summary>

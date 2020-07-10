@@ -27,7 +27,7 @@ namespace QuantityMeasurementTesting
             this.quantityMeasurementBL = new QuantityMeasurementBL(this.quantityMeasurementRL);
             this.measurementController = new MeasurementController(this.quantityMeasurementBL);
         }
-
+        /*
         [Fact]
         public void GetMethod__WhenCalledGetAllQuantities_ShouldReturnOkResult()
         {
@@ -204,6 +204,6 @@ namespace QuantityMeasurementTesting
             {
                 throw new Exception(e.Message);
             }
-        }
+        }*/
     }
 }

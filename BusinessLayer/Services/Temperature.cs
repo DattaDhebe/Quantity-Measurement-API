@@ -54,7 +54,7 @@ namespace BusinessLayer
                 return TemperatureUnit.CelsiusToFahrenheit;
             }
 
-            return 0; 
+            return TemperatureUnit.Fahrenheit; 
         }
 
         /// <summary>
