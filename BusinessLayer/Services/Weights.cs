@@ -13,18 +13,20 @@ namespace BusinessLayer
     /// class for weights
     /// </summary>
     public class Weights
-    {        
+    {
+        const double CommanWeights = 1000;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Weights" /> class.
         /// </summary>
         public Weights()
         {
         }
-       
+
         /// <summary>
         /// enum to specify measurements
         /// </summary>
-        public enum Unit 
+        public enum WeightsUnit 
         { 
             /// <summary>
             /// for measurement of kilogram
@@ -52,19 +54,35 @@ namespace BusinessLayer
             TonneToKilograms
         }
 
+        public WeightsUnit SetUnitAndConvertWeights(string operation)
+        {
+            if (operation == "KilogramToGrams")
+            {
+                return WeightsUnit.KilogramToGrams;
+            }
+
+            if (operation == "TonneToKilograms")
+            {
+                return WeightsUnit.TonneToKilograms;
+            }
+
+            return 0; 
+        }
+
+
         /// <summary>
         /// Method to convert one volume to another
         /// </summary>
         /// <param name="unit">defines which unit used</param>
         /// <param name="weights">weights for conversion</param>
         /// <returns>returns value after calculation</returns>
-        public double ConvertWeigths(Unit unit, double weights)
+        public double ConvertWeigths(WeightsUnit unit, double weights)
         {
             try
             {
-                if (unit.Equals(Unit.KilogramToGrams) || unit.Equals(Unit.TonneToKilograms))
+                if (unit.Equals(WeightsUnit.KilogramToGrams) || unit.Equals(WeightsUnit.TonneToKilograms))
                 {
-                    return weights * 1000;
+                    return weights * CommanWeights;
                 }
 
                 return weights;

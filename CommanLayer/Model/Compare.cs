@@ -15,7 +15,7 @@ namespace CommanLayer.Models
 
         [Required]
         [RegularExpression(@"^[a-z]*$")]
-        public string OperationType { get; set; } 
+        public string MeasurementType { get; set; } 
 
         [Required]
         [RegularExpression(@"^[A-Z][a-zA-Z]*$")]

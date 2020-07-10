@@ -32,7 +32,7 @@ namespace BusinessLayer
         /// <summary>
         /// enum to specify measurements
         /// </summary>
-        public enum Unit
+        public enum LengthUnit
         {
             /// <summary>
             /// Measurement for Feet
@@ -71,24 +71,24 @@ namespace BusinessLayer
             
         }
 
-        public Unit SetUnitAndConvertLength(string operation)
+        public LengthUnit SetUnitAndConvertLength(string operation)
         {
             if (operation == "FeetToInch")
             {
-                return Unit.FeetToInch;
+                return LengthUnit.FeetToInch;
             }
 
             if (operation == "YardToInch")
             {
-                return Unit.YardToInch;
+                return LengthUnit.YardToInch;
             }
             
             if (operation == "CentimeterToInch")
             {
-                return Unit.CentimeterToInch;
+                return LengthUnit.CentimeterToInch;
             }
 
-            return Unit.Inch;
+            return 0;
         }
 
         /// <summary>
@@ -97,21 +97,21 @@ namespace BusinessLayer
         /// <param name="unit">defines which unit used</param>
         /// <param name="length">length for conversion</param>
         /// <returns>returns value after calculation</returns>
-        public double ConvertLength(Unit unit, double length)
+        public double ConvertLength(LengthUnit unit, double length)
         {
             try
             {
-                if (unit.Equals(Unit.FeetToInch))
+                if (unit.Equals(LengthUnit.FeetToInch))
                 {
                     return length * InchToFeetConstant;
                 }
 
-                if (unit.Equals(Unit.YardToInch))
+                if (unit.Equals(LengthUnit.YardToInch))
                 {
                     return length * InchToYardConstant;
                 }
 
-                if (unit.Equals(Unit.CentimeterToInch))
+                if (unit.Equals(LengthUnit.CentimeterToInch))
                 {
                     return length / CentimeterToInchConstant;
                 }

@@ -11,9 +11,12 @@ namespace CommanLayer
         public int Id { get; set; }
 
         [Required]
-        [RegularExpression(@"^[A-Z][a-zA-Z]*$")]
-        public string OptionType { get; set; }
+        [RegularExpression(@"^[a-z]*$")]
+        public string MeasurementType { get; set; }
 
+        [Required]
+        [RegularExpression(@"^[A-Z][a-zA-Z]*$")]
+        public string ConversionType { get; set; }
         /// <summary>
         /// value for input
         /// </summary>

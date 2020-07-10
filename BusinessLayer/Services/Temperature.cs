@@ -29,7 +29,7 @@ namespace BusinessLayer
         /// <summary>
         /// enum to specify measurements
         /// </summary>
-        public enum Unit
+        public enum TemperatureUnit
         {
             /// <summary>
             /// Temperature for Fahrenheit
@@ -47,17 +47,27 @@ namespace BusinessLayer
             CelsiusToFahrenheit
         }
 
+        public TemperatureUnit SetUnitAndConvertTemperature(string operation)
+        {
+            if (operation == "CelsiusToFahrenheit")
+            {
+                return TemperatureUnit.CelsiusToFahrenheit;
+            }
+
+            return 0; 
+        }
+
         /// <summary>
         /// Method to convert Weights
         /// </summary>
         /// <param name="unit">defines which unit used</param>
         /// <param name="temperature">defines which type of temperature</param>
         /// <returns>return calculated temperature</returns>
-        public double ConvertTemperature(Unit unit, double temperature)
+        public double ConvertTemperature(TemperatureUnit unit, double temperature)
         {
             try
             {
-                if (unit.Equals(Unit.CelsiusToFahrenheit))
+                if (unit.Equals(TemperatureUnit.CelsiusToFahrenheit))
                 {
                     return CelsiusToFahrenheit + (temperature * 1.8) - 1.8;
                 }

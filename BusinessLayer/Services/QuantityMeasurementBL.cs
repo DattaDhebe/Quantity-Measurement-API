@@ -6,6 +6,10 @@ using CommanLayer.Model;
 using CommanLayer.Models;
 using RepositoryLayer.Interface;
 using static BusinessLayer.Length;
+using static BusinessLayer.Weights;
+using static BusinessLayer.Volumes;
+using static BusinessLayer.Temperature;
+using System.Security.Cryptography.X509Certificates;
 
 namespace BusinessLayer.Services
 {
@@ -70,7 +74,7 @@ namespace BusinessLayer.Services
         {
             try
             {
-                quantity.Result = Calculate(quantity);
+                quantity.Result = UnitConversion(quantity);
                 
                 if(quantity.Result > 0)
                 {
@@ -127,114 +131,58 @@ namespace BusinessLayer.Services
             }
         }
     
-        public double Calculate(Quantity quantity)
+        public double UnitConversion(Quantity quantity)
         {
             try
             {
 
-                string operation = quantity.OptionType;
+                string MeasurementType = quantity.MeasurementType;
+                string conversionType = quantity.ConversionType;
                 double value = quantity.Value;
-                //double result = quantity.Result;
 
                 Length length = new Length();
                 Weights weights = new Weights();
                 Volumes volume = new Volumes();
                 Temperature temperature = new Temperature();
 
-                Unit unit = length.SetUnitAndConvertLength(operation);
-                
-
-                if (unit == Unit.FeetToInch || unit == Unit.YardToInch || unit == Unit.CentimeterToInch)
+                if (MeasurementType == "length")
                 {
-                    return length.ConvertLength(unit, value);
+                    LengthUnit unit = length.SetUnitAndConvertLength(conversionType);
+
+                    if (unit == LengthUnit.FeetToInch || unit == LengthUnit.YardToInch || unit == LengthUnit.CentimeterToInch)
+                    {
+                        return length.ConvertLength(unit, value);
+                    }  
                 }
+
+                if (MeasurementType == "weight")
+                {
+                    WeightsUnit unit = weights.SetUnitAndConvertWeights(conversionType);
+                    if (unit.Equals(WeightsUnit.KilogramToGrams) || unit.Equals(WeightsUnit.TonneToKilograms))
+                    {
+                        return weights.ConvertWeigths(unit, value);
+                    }
+                }
+
+                if (MeasurementType == "volume")
+                {
+                    VolumeUnit unit = volume.SetUnitAndConvertVolume(conversionType);
+                    if (unit.Equals(VolumeUnit.GallonToLiter) || unit.Equals(VolumeUnit.LiterToMilliliter) || unit.Equals(VolumeUnit.MilliliterToLiter))
+                    {
+                        return volume.ConvertVolumes(unit, value);
+                    }
+                }
+                if (MeasurementType == "temperature")
+                {
+                    TemperatureUnit unit = temperature.SetUnitAndConvertTemperature(conversionType);
+                    if (unit.Equals(TemperatureUnit.CelsiusToFahrenheit))
+                    {
+                        return temperature.ConvertTemperature(unit, value);
+                    }
+                }              
 
                 return value;
-               /* // For Lenght Unit
-                const double InchToFeetConstant = 12;
-                const double InchToYardConstant = 36;
-                const double FeetToYardConstant = 3;
-                const double CentimeterToInchConstant = 2.5;
-
-                // For Weight 
-                const double WeightConstant = 1000;
-
-                // For Volume
-                const double VolumeConstant = 1000;
-                const double GallonToLiterConstant = 3.78;
-
-                // For Temperature
-            
-
-                // For Lenght Unit
-                if (operation == All_Enum.OptionType.InchToFeet.ToString())
-                {
-                    result = value / InchToFeetConstant;
-                }
-                else if (operation == All_Enum.OptionType.InchToYard.ToString())
-                {
-                    result = value / InchToYardConstant;
-                }
-                else if (operation == All_Enum.OptionType.FeetToInch.ToString())
-                {
-                    result = value * InchToFeetConstant;
-                }
-                else if (operation == All_Enum.OptionType.FeetToYard.ToString())
-                {
-                    result = value / FeetToYardConstant;
-                }
-                else if (operation == All_Enum.OptionType.YardToInch.ToString())
-                {
-                    result = value * InchToYardConstant;
-                }
-                else if (operation == All_Enum.OptionType.YardToFeet.ToString())
-                {
-                    result = value * FeetToYardConstant;
-                }
-                else if (operation == All_Enum.OptionType.CentimeterToInch.ToString())
-                {
-                    result = value / CentimeterToInchConstant;
-                }
-
-                // For Weight Units
-                if (operation == All_Enum.OptionType.GramToKilogram.ToString() || operation == All_Enum.OptionType.KilogramToTonne.ToString())
-                {
-                    result = value / WeightConstant;
-                }
-                else if (operation == All_Enum.OptionType.GramToTonne.ToString())
-                {
-                    result = value / (WeightConstant * WeightConstant);
-                }
-                else if (operation == All_Enum.OptionType.KilogramToGram.ToString())
-                {
-                    result = value * WeightConstant;
-                }
-                else if (operation == All_Enum.OptionType.TonneToGram.ToString())
-                {
-                    result = value * (WeightConstant * WeightConstant);
-                }
-
-                //For Volume Units
-                else if (operation == All_Enum.OptionType.MililiterToLiter.ToString())
-                {
-                    result = value / VolumeConstant;
-                }
-                else if (operation == All_Enum.OptionType.LiterToMililiter.ToString())
-                {
-                    result = value * VolumeConstant;
-                }
-                else if (operation == All_Enum.OptionType.LiterToGallon.ToString())
-                {
-                    result = value / GallonToLiterConstant;
-                }
-                else if (operation == All_Enum.OptionType.GallonToLiter.ToString())
-                {
-                    result = value * GallonToLiterConstant;
-                }
-
-                
-                return Math.Round(result, 2);
-               */
+              
             }
             catch (Exception e)
             {
