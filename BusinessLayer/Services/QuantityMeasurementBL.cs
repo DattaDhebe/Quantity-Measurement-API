@@ -29,6 +29,18 @@ namespace BusinessLayer.Services
             }
         }
 
+        public Quantity GetQuantityById(int Id)
+        {
+            try
+            {
+                return quantityMeasurementRL.GetQuantityById(Id);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
         public IEnumerable<Compare> GetAllComparison()
         {
             try

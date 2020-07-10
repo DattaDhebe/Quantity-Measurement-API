@@ -60,6 +60,20 @@ namespace RepositoryLayer.Services
             }
         }
 
+        public Compare GetComparisonById(int Id)
+        {
+            try
+            {
+                //Find data from database by ID
+                Compare compare = dBContext.Comparision.Find(Id);
+                return compare;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
         public Quantity Add(Quantity quantity)
         {
             try

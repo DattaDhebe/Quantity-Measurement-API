@@ -25,8 +25,6 @@ namespace Quantity_Measurement_API.Controllers
             try
             {
                 var result = businessLayer.GetAllQuantity();
-
-                //if entry is not equal to null
                 if (!result.Equals(null))
                 {
                     bool success = true;
@@ -53,8 +51,6 @@ namespace Quantity_Measurement_API.Controllers
             try
             {
                 var result = businessLayer.Convert(quantity);
-  
-                //if entry is not equal to null
                 if (!result.Equals(null))
                 {
                     bool success = true;
@@ -81,16 +77,15 @@ namespace Quantity_Measurement_API.Controllers
             try
             {
                 var result = businessLayer.GetQuantityById(Id);
-                //if result is not equal to zero then details found
                 if (!result.Equals(null))
                 {
-                    var success = true;
+                    bool success = true;
                     var message = "Conversion Data found ";
                     return this.Ok(new { success, message, Data = result });
                 }
-                else                                           //Data is not found
+                else                                          
                 {
-                    var success = "False";
+                    bool success = false;
                     var message = "Conversion Data is not found";
                     return this.Ok(new { success, message, Data = result });
                 }
@@ -172,6 +167,33 @@ namespace Quantity_Measurement_API.Controllers
                     bool success = false;
                     var message = "Sorry, Not able to Extract Data";
                     return this.Ok(new { success, message, data = result });
+                }
+            }
+            catch (Exception e)
+            {
+                bool success = false;
+                return BadRequest(new { success, message = e.Message });
+            }
+        }
+
+        [HttpGet]
+        [Route("compare/{Id}")]
+        public IActionResult GetComparisonById(int Id)
+        {
+            try
+            {
+                var result = businessLayer.GetComparisonById(Id);
+                if (!result.Equals(null))
+                {
+                    var success = true;
+                    var message = "Conversion Data found ";
+                    return this.Ok(new { success, message, Data = result });
+                }
+                else
+                {
+                    var success = false;
+                    var message = "Conversion Data is not found";
+                    return this.Ok(new { success, message, Data = result });
                 }
             }
             catch (Exception e)
