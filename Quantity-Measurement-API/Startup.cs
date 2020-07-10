@@ -16,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using RepositoryLayer;
 using RepositoryLayer.Interface;
 using RepositoryLayer.Services;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Quantity_Measurement_API
 {
@@ -44,11 +45,24 @@ namespace Quantity_Measurement_API
         /// <param name="services">for services</param>
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
+
             services.AddDbContext<ApplicationDbContext>(opts => opts.UseSqlServer(Configuration["ConnectionStrings:QuantityMeasurement"]));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddScoped<IQuantityMeasurementBL, QuantityMeasurementBL>();
             services.AddScoped<IQuantityMeasurementRL, QuantityMeasurementRL>();
-
+            
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "Quantity Measurement API", Description = "Swagger Quantity Measurement API" });
+            });
         }
 
         /// <summary>
@@ -68,7 +82,17 @@ namespace Quantity_Measurement_API
             }
 
             app.UseHttpsRedirection();
-            app.UseMvc();
+            app.UseCors("CorsPolicy");
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });
+            app.UseSwagger();
+            app.UseSwaggerUI(
+                c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Core API"); }
+                );
         }
     }
 }

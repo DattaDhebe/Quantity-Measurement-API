@@ -73,12 +73,12 @@ namespace RepositoryLayer.Services
                 if (quantity != null)
                 {
                     //Remove Data from database
-                    dBContext.Quantities.RemoveRange();
-
+                    //dBContext.Quantities.RemoveRange();
+                    dBContext.Remove(dBContext.Quantities.Single(a => a.Id == Id));
                     //saves all changes in database
                     dBContext.SaveChanges();
                 }
-                return quantity;
+                return GetAllQuantity();
             }
             catch (Exception e)
             {
@@ -95,12 +95,12 @@ namespace RepositoryLayer.Services
                 if (compare != null)
                 {
                     //Remove Data from database
-                    dBContext.Comparision.RemoveRange(compare);
-
+                    //dBContext.Comparision.RemoveRange(compare);
+                    dBContext.Remove(dBContext.Comparision.Single(a => a.Id == Id));
                     //saves all changes in database
                     dBContext.SaveChanges();
                 }
-                return compare;
+                return GetAllComparison();
             }
             catch (Exception e)
             {

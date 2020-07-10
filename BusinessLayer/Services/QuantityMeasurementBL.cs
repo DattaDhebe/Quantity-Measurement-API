@@ -92,6 +92,7 @@ namespace BusinessLayer.Services
                 if (compare.Result != null)
                 {
                     return quantityMeasurementRL.AddComparedValue(compare);
+
                 }
                 return compare;
             }
@@ -227,6 +228,7 @@ namespace BusinessLayer.Services
                     result = value * GallonToLiterConstant;
                 }
 
+                
                 return Math.Round(result, 2);
 
             }
@@ -299,7 +301,7 @@ namespace BusinessLayer.Services
         {
             try
             {
-                string operationType = "";
+                string operationType = Unit_Value;
                 if (Unit_Value == All_Enum.Unit.Feet.ToString())
                 {
                     operationType = "FeetToInch";
