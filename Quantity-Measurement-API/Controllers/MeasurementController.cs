@@ -45,32 +45,6 @@ namespace Quantity_Measurement_API.Controllers
             }
         }
 
-        [HttpPost]
-        public IActionResult Convert([FromBody] Quantity quantity)
-        {
-            try
-            {
-                var result = businessLayer.Convert(quantity);
-                if (!result.Equals(null))
-                {
-                    bool success = true;
-                    var message = "New Data Added Sucessfully";
-                    return this.Ok(new { success, message, data = result });
-                }
-                else                                              
-                {
-                    bool success = false;
-                    var message = "New Data is not Added";
-                    return this.Ok(new { success, message, data = result });
-                }
-            }
-            catch (Exception e)
-            {
-                bool success = false;
-                return BadRequest(new { success, message = e.Message });
-            }
-        }
-
         [HttpGet("{Id}")]
         public IActionResult GetQuantityById(int Id)
         {
@@ -93,6 +67,32 @@ namespace Quantity_Measurement_API.Controllers
             catch (Exception e)
             {
                 throw new Exception(e.Message);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult Convert([FromBody] Quantity quantity)
+        {
+            try
+            {
+                var result = businessLayer.Convert(quantity);
+                if (!result.Equals(null))
+                {
+                    bool success = true;
+                    var message = "New Data Added Sucessfully";
+                    return this.Ok(new { success, message, data = result });
+                }
+                else
+                {
+                    bool success = false;
+                    var message = "New Data is not Added";
+                    return this.Ok(new { success, message, data = result });
+                }
+            }
+            catch (Exception e)
+            {
+                bool success = false;
+                return BadRequest(new { success, message = e.Message });
             }
         }
 
@@ -122,32 +122,7 @@ namespace Quantity_Measurement_API.Controllers
             }
         }
 
-        [HttpPost]
-        [Route("compare")]
-        public IActionResult AddComparedValue([FromBody] Compare Info)
-        {
-            try
-            {
-                var result = businessLayer.AddComparedValue(Info);
-                if (!result.Equals(null))
-                {
-                    bool success = true;
-                    var message = "new data is added sucessfully";
-                    return this.Ok(new { success, message, data = result });
-                }
-                else
-                {
-                    bool success = false;
-                    var message = "new data is not added.";
-                    return this.Ok(new { success, message, data = result });
-                }
-            }
-            catch (Exception e)
-            {
-                bool success = false;
-                return BadRequest(new { success, message = e.Message });
-            }
-        }
+       
 
         [HttpGet]
         [Route("compare")]
@@ -194,6 +169,33 @@ namespace Quantity_Measurement_API.Controllers
                     var success = false;
                     var message = "Conversion Data is not found";
                     return this.Ok(new { success, message, Data = result });
+                }
+            }
+            catch (Exception e)
+            {
+                bool success = false;
+                return BadRequest(new { success, message = e.Message });
+            }
+        }
+
+        [HttpPost]
+        [Route("compare")]
+        public IActionResult AddComparedValue([FromBody] Compare Info)
+        {
+            try
+            {
+                var result = businessLayer.AddComparedValue(Info);
+                if (!result.Equals(null))
+                {
+                    bool success = true;
+                    var message = "new data is added sucessfully";
+                    return this.Ok(new { success, message, data = result });
+                }
+                else
+                {
+                    bool success = false;
+                    var message = "new data is not added.";
+                    return this.Ok(new { success, message, data = result });
                 }
             }
             catch (Exception e)

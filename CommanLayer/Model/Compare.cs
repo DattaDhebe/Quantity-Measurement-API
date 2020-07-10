@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 
 namespace CommanLayer.Models
@@ -13,18 +14,22 @@ namespace CommanLayer.Models
         public int Id { get; set; }
 
         [Required]
-        public double First_Value { get; set; }
+        [RegularExpression(@"^[a-z]*$")]
+        public string OperationType { get; set; } 
 
         [Required]
         [RegularExpression(@"^[A-Z][a-zA-Z]*$")]
         public string First_Value_Unit { get; set; }
 
         [Required]
-        public double Second_Value { get; set; }
+        public double First_Value { get; set; }
 
         [Required]
         [RegularExpression(@"^[A-Z][a-zA-Z]*$")]
         public string Second_Value_Unit { get; set; }
+
+        [Required]
+        public double Second_Value { get; set; }
 
         public string Result { get; set; }
 

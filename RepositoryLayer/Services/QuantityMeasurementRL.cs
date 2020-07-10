@@ -97,16 +97,16 @@ namespace RepositoryLayer.Services
             try
             {
                 List<Quantity> quantity = dBContext.Quantities.ToList();
-                //Quantity quantity = dBContext.Quantities.Find(Id);
+
                 if (quantity != null)
                 {
                     //Remove Data from database
-                    //dBContext.Quantities.RemoveRange();
                     dBContext.Remove(dBContext.Quantities.Single(a => a.Id == Id));
+
                     //saves all changes in database
                     dBContext.SaveChanges();
                 }
-                return GetAllQuantity();
+                return quantity;
             }
             catch (Exception e)
             {
@@ -119,16 +119,15 @@ namespace RepositoryLayer.Services
             try
             {
                 List<Compare> compare = dBContext.Comparision.Take(1).ToList();
-                //Compare compare = dBContext.Comparision.Find(Id);
                 if (compare != null)
                 {
                     //Remove Data from database
-                    //dBContext.Comparision.RemoveRange(compare);
                     dBContext.Remove(dBContext.Comparision.Single(a => a.Id == Id));
+
                     //saves all changes in database
                     dBContext.SaveChanges();
                 }
-                return GetAllComparison();
+                return compare;
             }
             catch (Exception e)
             {

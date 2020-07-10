@@ -8,17 +8,18 @@ namespace RepositoryLayer.Interface
     {
         IEnumerable<Quantity> GetAllQuantity();
 
-        Quantity Add(Quantity quantity);
-
         Quantity GetQuantityById(int Id);
 
-        IEnumerable<Quantity> DeleteQuntityById(int Id);
+        Quantity Add(Quantity quantity);
 
-        Compare AddComparedValue(Compare compare);
+
+        IEnumerable<Quantity> DeleteQuntityById(int Id);
 
         IEnumerable<Compare> GetAllComparison();
 
         Compare GetComparisonById(int Id);
+
+        Compare AddComparedValue(Compare compare);
 
         IEnumerable<Compare> DeleteComparisonById(int Id);
     }
