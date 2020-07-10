@@ -10,6 +10,8 @@ namespace RepositoryLayer.Interface
 
         Quantity Add(Quantity quantity);
 
+        Quantity GetQuantityById(int Id);
+
         IEnumerable<Quantity> DeleteQuntityById(int Id);
 
         Compare AddComparedValue(Compare compare);

@@ -10,6 +10,8 @@ namespace BusinessLayer.Interface
 
         Quantity Convert(Quantity info);
 
+        Quantity GetQuantityById(int  Id);
+
         IEnumerable<Quantity> DeleteQuntityById(int Id);
 
         Compare AddComparedValue(Compare compare);

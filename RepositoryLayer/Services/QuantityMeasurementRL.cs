@@ -34,6 +34,20 @@ namespace RepositoryLayer.Services
             }
         }
 
+        public Quantity GetQuantityById(int Id)
+        {
+            try
+            {
+                //Find data from database by ID
+                Quantity quantity = dBContext.Quantities.Find(Id);
+                return quantity;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
         public IEnumerable<Compare> GetAllComparison()
         {
             try
