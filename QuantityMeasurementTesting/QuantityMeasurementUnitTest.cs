@@ -27,7 +27,7 @@ namespace QuantityMeasurementTesting
             this.quantityMeasurementBL = new QuantityMeasurementBL(this.quantityMeasurementRL);
             this.measurementController = new MeasurementController(this.quantityMeasurementBL);
         }
-        /*
+        
         [Fact]
         public void GetMethod__WhenCalledGetAllQuantities_ShouldReturnOkResult()
         {
@@ -53,8 +53,9 @@ namespace QuantityMeasurementTesting
                 var controller = new MeasurementController(quantityMeasurementBL);
                 var result = new Quantity
                 {
-                    OptionType = "InchToYard",
-                    Value = 24
+                    MeasurementType = "length",
+                    ConversionType = "FeetToInch",
+                    Value = 1
                 };
                 var okResult = controller.Convert(result);
                 Assert.IsType<OkObjectResult>(okResult);
@@ -73,8 +74,9 @@ namespace QuantityMeasurementTesting
                 var controller = new MeasurementController(quantityMeasurementBL);
                 var result = new Quantity
                 {
-                    OptionType = "GramToKilogram",
-                    Value = 20000
+                    MeasurementType = "weight",
+                    ConversionType = "KilogramToGrams",
+                    Value = 2
                 };
                 var okResult = controller.Convert(result);
                 Assert.IsType<OkObjectResult>(okResult);
@@ -96,8 +98,9 @@ namespace QuantityMeasurementTesting
                 var controller = new MeasurementController(quantityMeasurementBL);
                 var result = new Quantity
                 {
-                    OptionType = "MililiterToLiter",
-                    Value = 20000
+                    MeasurementType = "volume",
+                    ConversionType = "LiterToMililiter",
+                    Value = 2
                 };
                 var okResult = controller.Convert(result);
                 Assert.IsType<OkObjectResult>(okResult);
@@ -119,8 +122,9 @@ namespace QuantityMeasurementTesting
                 var controller = new MeasurementController(quantityMeasurementBL);
                 var result = new Quantity
                 {
-                    OptionType = "FeetToCentimeter",
-                    Value = 100
+                    MeasurementType = "length",
+                    ConversionType = "FeetToCentimeter",
+                    Value = 5
                 };
                 var okResult = controller.Convert(result);
                 Assert.IsType<OkObjectResult>(okResult);
@@ -142,35 +146,12 @@ namespace QuantityMeasurementTesting
                 var controller = new MeasurementController(quantityMeasurementBL);
                 var result = new Compare
                 {
-                    First_Value = 12,
-                    First_Value_Unit = "Feet",
-                    Second_Value = 6,
-                    Second_Value_Unit = "Yard"
-                };
-                var okResult = controller.AddComparedValue(result);
-                Assert.IsType<OkObjectResult>(okResult);
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }      
+                    MeasurementType = "length",
+                    First_Value_Unit = "FeetToInch",
+                    First_Value = 3,
+                    Second_Value_Unit = "YardToInch",
+                    Second_Value = 1,
 
-        /// <summary>
-        ///Test Case for Two Volume Units Comparison
-        /// </summary>
-        [Fact]
-        public void GivenVolumeUnit_WhentwoDifferentUnit_ComparisonandPassResultEqual()
-        {
-            try
-            {
-                var controller = new MeasurementController(quantityMeasurementBL);
-                var result = new Compare
-                {
-                    First_Value = 20,
-                    First_Value_Unit = "Liter",
-                    Second_Value = 4.9625,
-                    Second_Value_Unit = "Gallon"
                 };
                 var okResult = controller.AddComparedValue(result);
                 Assert.IsType<OkObjectResult>(okResult);
@@ -180,30 +161,5 @@ namespace QuantityMeasurementTesting
                 throw new Exception(e.Message);
             }
         }
-
-        /// <summary>
-        ///Test Case for Two Weight Units Comparison
-        /// </summary>
-        [Fact]
-        public void GivenWeightUnit_WhentwoDifferentUnit_ComparisonandPassResult()
-        {
-            try
-            {
-                var controller = new MeasurementController(quantityMeasurementBL);
-                var result = new Compare
-                {
-                    First_Value = 100,
-                    First_Value_Unit = "Kilogram",
-                    Second_Value = 10,
-                    Second_Value_Unit = "Tonne"
-                };
-                var okResult = controller.AddComparedValue(result);
-                Assert.IsType<OkObjectResult>(okResult);
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }*/
     }
 }

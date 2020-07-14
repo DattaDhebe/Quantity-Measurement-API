@@ -135,7 +135,6 @@ namespace BusinessLayer.Services
         {
             try
             {
-
                 string MeasurementType = quantity.MeasurementType;
                 string conversionType = quantity.ConversionType;
                 double value = quantity.Value;
@@ -168,12 +167,12 @@ namespace BusinessLayer.Services
 
                 if (firstResult >= secondResult)
                 {
-                    return firstValue + " is greater than " + secondValue;
+                    return firstValueUnit +" "+ firstValue + " is greater than " + secondValueUnit +" "+ secondValue;
                 }
 
                 if (firstResult <= secondResult)
                 {
-                    return firstValue + " is less than " + secondValue;
+                    return firstValueUnit + " " + firstValue + " is less than " + secondValueUnit + " " + secondValue;
                 }
 
                 return null;

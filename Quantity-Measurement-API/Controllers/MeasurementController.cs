@@ -61,12 +61,13 @@ namespace Quantity_Measurement_API.Controllers
                 {
                     bool success = false;
                     var message = "Conversion Data is not found";
-                    return this.Ok(new { success, message, Data = result });
+                    return this.NotFound(new { success, message, Data = result });
                 }
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                bool success = false;
+                return BadRequest(new { success, message = e.Message });
             }
         }
 
@@ -86,7 +87,7 @@ namespace Quantity_Measurement_API.Controllers
                 {
                     bool success = false;
                     var message = "New Data is not Added";
-                    return this.Ok(new { success, message, data = result });
+                    return this.NotFound(new { success, message, data = result });
                 }
             }
             catch (Exception e)
@@ -112,7 +113,7 @@ namespace Quantity_Measurement_API.Controllers
                 {
                     bool success = false;
                     var message = "Data is not deleted";
-                    return this.Ok(new { success, message, data = result });
+                    return this.NotFound(new { success, message, data = result });
                 }
             }
             catch (Exception e)
@@ -141,7 +142,7 @@ namespace Quantity_Measurement_API.Controllers
                 {
                     bool success = false;
                     var message = "Sorry, Not able to Extract Data";
-                    return this.Ok(new { success, message, data = result });
+                    return this.NotFound(new { success, message, data = result });
                 }
             }
             catch (Exception e)
@@ -168,7 +169,7 @@ namespace Quantity_Measurement_API.Controllers
                 {
                     var success = false;
                     var message = "Conversion Data is not found";
-                    return this.Ok(new { success, message, Data = result });
+                    return this.NotFound(new { success, message, Data = result });
                 }
             }
             catch (Exception e)
@@ -195,7 +196,7 @@ namespace Quantity_Measurement_API.Controllers
                 {
                     bool success = false;
                     var message = "new data is not added.";
-                    return this.Ok(new { success, message, data = result });
+                    return this.NotFound(new { success, message, data = result });
                 }
             }
             catch (Exception e)
@@ -222,7 +223,7 @@ namespace Quantity_Measurement_API.Controllers
                 {
                     bool success = false;
                     var message = "Data is not deleted";
-                    return this.Ok(new { success, message, data = result });
+                    return this.NotFound(new { success, message, data = result });
                 }
             }
             catch (Exception e)
